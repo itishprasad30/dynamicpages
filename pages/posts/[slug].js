@@ -4,16 +4,27 @@ import { MDXRemote } from "next-mdx-remote";
 import path from "path";
 import { serialize } from "next-mdx-remote/serialize";
 import styles from "../../styles/Post.module.css";
+import Link from "next/link";
+
 
 const Post = ({ frontMatter, slug, mdxSource }) => {
+  
   return (
     <div title={frontMatter.title}>
       <div className={styles.post}>
-        <h1 className="font-semibold my-8 text-3xl text-blue-700">
-          {frontMatter.title}
-        </h1>
-        <img src={frontMatter.image} alt="image" />
-        <MDXRemote {...mdxSource} />
+        <Link href="/">
+          <a className="font-bold text-3xl text-red-500 "> Back</a>
+        </Link>
+        <div className="  aspect-video  rounded-lg overflow-hidden ">
+          <img className="bg-cover" src={frontMatter.image} alt="image" />
+        </div>
+        <h1 className="font-bold my-8 text-5xl ">{frontMatter.title}</h1>
+
+        <main>
+          <article className="prose dark:prose-xl">
+            <MDXRemote {...mdxSource} className="prose dark:prose-xl" />
+          </article>
+        </main>
       </div>
     </div>
   );
